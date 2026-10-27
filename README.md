@@ -1,15 +1,20 @@
+<!-- markdownlint-disable MD033 MD041 -->
+<div align="center">
+
 # ♠ Royal Felt - Texas Hold'em Poker
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![WebSockets](https://img.shields.io/badge/WebSockets-Real--Time-blueviolet?style=for-the-badge)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-Luxury_Theme-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688?style=flat&logo=fastapi&logoColor=white)
+![WebSockets](https://img.shields.io/badge/WebSockets-Real--Time-blueviolet?style=flat)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-Luxury_Theme-1572B6?style=flat&logo=css3&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat)
 
 **Um jogo web de Texas Hold'em No-Limit com estética de cassino de luxo e 100% da lógica matemática, regras e inteligência artificial implementadas nativamente em Python.**
 
 [Começar a Jogar](#como-executar) • [Funcionalidades](#funcionalidades) • [Arquitetura](#arquitetura-do-projeto) • [Regras](#hierarquia-de-mãos)
+
+</div>
 
 ---
 
@@ -157,11 +162,13 @@ iniciar_jogo.bat
 ## Tecnologias Utilizadas
 
 - **Backend**: Python 3.10+, [FastAPI](https://fastapi.tiangolo.com/), [Uvicorn](https://www.uvicorn.org/), WebSockets nativos.
-- **Frontend**: HTML5 Semântico, Vanilla CSS3 (Custom Properties, Glassmorphism, CSS Grid & Flexbox), Vanilla JavaScript (ES6+ Modules).
+- **Frontend**: HTML5 Semântico, Vanilla CSS3, JavaScript (ES6+ Modules).
 - **Mídia & SFX**: Deck of Cards API, CardsJS SVG, Web Audio API Synthesizer.
 - **Tipografia**: Google Fonts (*Outfit*, *Cinzel*, *JetBrains Mono*).
 
 ---
+
+<div align="center">
 
 ## Licença
 
@@ -173,11 +180,13 @@ Este projeto é distribuído sob a licença **MIT**. Consulte o arquivo de licen
 
 Desenvolvido por **Caique Novaes**.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-caiquenovaes-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/caiquenovaes/)
-[![GitHub](https://img.shields.io/badge/GitHub-caiquenovaes1994-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/caiquenovaes1994)
-[![Telegram](https://img.shields.io/badge/Telegram-caiquenovaes1994-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/caiquenovaes1994)
-[![Gmail](https://img.shields.io/badge/Gmail-caiquenovaes1994%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:caiquenovaes1994@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-caiquenovaes-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/caiquenovaes/)
+[![GitHub](https://img.shields.io/badge/GitHub-caiquenovaes1994-181717?style=flat&logo=github&logoColor=white)](https://github.com/caiquenovaes1994)
+[![Telegram](https://img.shields.io/badge/Telegram-caiquenovaes1994-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/caiquenovaes1994)
+[![Gmail](https://img.shields.io/badge/Gmail-caiquenovaes1994%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:caiquenovaes1994@gmail.com)
 
 ---
 
-> *"A sorte distribui as cartas, a estratégia vence o jogo."* ♠
+*"A sorte distribui as cartas, a estratégia vence o jogo."* ♠
+
+</div>
