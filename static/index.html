@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Felt - Texas Hold'em Poker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%22100%22%20height=%22100%22><text y=%22.9em%22 font-size=%2290%22>♠</text></svg>">
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="header-bar">
+        <div class="brand">
+            <div class="brand-icon">♠</div>
+            <div class="brand-text">
+                <h1>ROYAL FELT</h1>
+                <span>Texas Hold'em • No Limit</span>
+            </div>
+        </div>
+
+        <div class="table-stats-bar">
+            <div class="stat-chip">
+                <span class="label">Blinds:</span>
+                <span class="val" id="header-blinds">$10 / $20</span>
+            </div>
+            <div class="stat-chip">
+                <span class="label">Mão:</span>
+                <span class="val" id="header-hand-count">#1</span>
+            </div>
+            <div class="stat-chip">
+                <span class="label">Status:</span>
+                <span class="val" id="header-phase" style="color: #60a5fa;">PREFLOP</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" id="btn-sound-toggle" title="Ativar/Desativar Som">
+                🔊
+            </button>
+            <button class="icon-btn" id="btn-rules-modal" title="Tabela de Mãos de Poker">
+                📖
+            </button>
+            <button class="icon-btn" id="btn-stats-modal" title="Estatísticas do Jogador">
+                📊
+            </button>
+            <button class="icon-btn" id="btn-reset-table" title="Reiniciar Mesa">
+                🔄
+            </button>
+        </div>
+    </header>
+
+    <!-- CASINO ARENA -->
+    <main class="casino-arena">
+        <div class="poker-table-container">
+            <div class="table-rail">
+                <div class="table-gold-rim">
+                    <div class="table-felt">
+                        <!-- Watermark & Branding -->
+                        <div class="felt-watermark">ROYAL FELT</div>
+                        <div class="felt-submark">NO LIMIT HOLD'EM CLUB</div>
+
+                        <!-- Dealer Station -->
+                        <div class="dealer-tray">Dealer Station</div>
+
+                        <!-- Center Pot & Community Cards -->
+                        <div class="table-center">
+                            <div class="pot-container" id="pot-display">
+                                <span class="pot-icon">🪙</span>
+                                <div class="pot-info">
+                                    <span class="pot-label">Pote Total</span>
+                                    <span class="pot-amount" id="pot-total-val">$0</span>
+                                </div>
+                            </div>
+
+                            <div class="community-cards-rack" id="community-cards-rack">
+                                <div class="card-slot" id="comm-slot-0"></div>
+                                <div class="card-slot" id="comm-slot-1"></div>
+                                <div class="card-slot" id="comm-slot-2"></div>
+                                <div class="card-slot" id="comm-slot-3"></div>
+                                <div class="card-slot" id="comm-slot-4"></div>
+                            </div>
+                        </div>
+
+                        <!-- 5 PLAYER SEATS -->
+                        <!-- Seat 0: You (Human) -->
+                        <div class="player-seat seat-0" id="seat-player_0">
+                            <div class="action-status-pill" id="action-pill-player_0" style="display: none;"></div>
+                            <div class="player-table-bet" id="bet-player_0" style="display: none;">🪙 $0</div>
+                            <div class="player-cards-row" id="cards-player_0"></div>
+                            <div class="seat-hud">
+                                <div class="thinking-bar"></div>
+                                <div class="player-avatar-wrap">
+                                    <div class="player-avatar">🤠</div>
+                                    <div class="role-badge" id="role-player_0" style="display: none;">D</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name-row">
+                                        <span class="player-name" id="name-player_0">Você</span>
+                                    </div>
+                                    <span class="player-title">Jogador VIP</span>
+                                    <div class="player-chips-badge">
+                                        <span>🪙</span>
+                                        <span id="chips-player_0">$1,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hand-eval-helper" id="human-hand-helper" style="display: none;">
+                                <span>🎯</span>
+                                <span id="human-hand-desc">Aguardando cartas...</span>
+                            </div>
+                        </div>
+
+                        <!-- Seat 1: Viktor (TAG) -->
+                        <div class="player-seat seat-1" id="seat-bot_1">
+                            <div class="action-status-pill" id="action-pill-bot_1" style="display: none;"></div>
+                            <div class="player-table-bet" id="bet-bot_1" style="display: none;">🪙 $0</div>
+                            <div class="player-cards-row bot-cards" id="cards-bot_1"></div>
+                            <div class="seat-hud">
+                                <div class="thinking-bar"></div>
+                                <div class="player-avatar-wrap">
+                                    <div class="player-avatar">👨‍💼</div>
+                                    <div class="role-badge" id="role-bot_1" style="display: none;">D</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name-row">
+                                        <span class="player-name">Viktor</span>
+                                    </div>
+                                    <span class="player-title">O Rochedo</span>
+                                    <div class="player-chips-badge">
+                                        <span>🪙</span>
+                                        <span id="chips-bot_1">$1,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seat 2: Elena (LAG) -->
+                        <div class="player-seat seat-2" id="seat-bot_2">
+                            <div class="action-status-pill" id="action-pill-bot_2" style="display: none;"></div>
+                            <div class="player-table-bet" id="bet-bot_2" style="display: none;">🪙 $0</div>
+                            <div class="player-cards-row bot-cards" id="cards-bot_2"></div>
+                            <div class="seat-hud">
+                                <div class="thinking-bar"></div>
+                                <div class="player-avatar-wrap">
+                                    <div class="player-avatar">👩‍🦰</div>
+                                    <div class="role-badge" id="role-bot_2" style="display: none;">D</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name-row">
+                                        <span class="player-name">Elena</span>
+                                    </div>
+                                    <span class="player-title">Rainha do Blefe</span>
+                                    <div class="player-chips-badge">
+                                        <span>🪙</span>
+                                        <span id="chips-bot_2">$1,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seat 3: Marco (Calling Station) -->
+                        <div class="player-seat seat-3" id="seat-bot_3">
+                            <div class="action-status-pill" id="action-pill-bot_3" style="display: none;"></div>
+                            <div class="player-table-bet" id="bet-bot_3" style="display: none;">🪙 $0</div>
+                            <div class="player-cards-row bot-cards" id="cards-bot_3"></div>
+                            <div class="seat-hud">
+                                <div class="thinking-bar"></div>
+                                <div class="player-avatar-wrap">
+                                    <div class="player-avatar">🤠</div>
+                                    <div class="role-badge" id="role-bot_3" style="display: none;">D</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name-row">
+                                        <span class="player-name">Marco</span>
+                                    </div>
+                                    <span class="player-title">O Xerife</span>
+                                    <div class="player-chips-badge">
+                                        <span>🪙</span>
+                                        <span id="chips-bot_3">$1,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seat 4: Sofia (GTO Pro) -->
+                        <div class="player-seat seat-4" id="seat-bot_4">
+                            <div class="action-status-pill" id="action-pill-bot_4" style="display: none;"></div>
+                            <div class="player-table-bet" id="bet-bot_4" style="display: none;">🪙 $0</div>
+                            <div class="player-cards-row bot-cards" id="cards-bot_4"></div>
+                            <div class="seat-hud">
+                                <div class="thinking-bar"></div>
+                                <div class="player-avatar-wrap">
+                                    <div class="player-avatar">👩‍💻</div>
+                                    <div class="role-badge" id="role-bot_4" style="display: none;">D</div>
+                                </div>
+                                <div class="player-info">
+                                    <div class="player-name-row">
+                                        <span class="player-name">Sofia</span>
+                                    </div>
+                                    <span class="player-title">A Mestre (GTO)</span>
+                                    <div class="player-chips-badge">
+                                        <span>🪙</span>
+                                        <span id="chips-bot_4">$1,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINNER SHOWDOWN OVERLAY -->
+        <div class="showdown-banner-overlay" id="showdown-banner">
+            <div class="showdown-title" id="showdown-winner-name">🏆 Viktor Venceu!</div>
+            <div class="showdown-hand-desc" id="showdown-hand-desc">Full House de Ases com Reis</div>
+            <div class="showdown-payout" id="showdown-payout">+$480</div>
+        </div>
+
+        <!-- LIVE CASINO ACTION TICKER -->
+        <div class="live-log-container" id="live-log-box">
+            <div class="live-log-header">
+                <span>Transmissão da Mesa</span>
+                <span id="connection-status" style="color: #34d399;">● Ao Vivo</span>
+            </div>
+            <div class="log-items" id="log-items">
+                <!-- Log entries dynamically injected -->
+            </div>
+        </div>
+    </main>
+
+    <!-- BOTTOM ACTION DOCK -->
+    <footer class="action-dock">
+        <!-- Start New Hand Button (When round is over) -->
+        <button class="btn-new-hand" id="btn-start-hand">
+            Distribuir Próxima Mão ♠
+        </button>
+
+        <!-- Player Actions Controls -->
+        <div class="action-buttons-group" id="player-action-controls">
+            <!-- FOLD -->
+            <button class="act-btn btn-fold" id="act-btn-fold" disabled>
+                <span>FOLD</span>
+                <span class="sub-text">Desistir</span>
+            </button>
+
+            <!-- CHECK / CALL -->
+            <button class="act-btn btn-check-call" id="act-btn-check-call" disabled>
+                <span id="check-call-label">CHECK</span>
+                <span class="sub-text" id="check-call-amount">Mesa</span>
+            </button>
+
+            <!-- RAISE / BET SLIDER PANEL -->
+            <div class="bet-slider-panel">
+                <div class="slider-row">
+                    <input type="range" class="bet-range-slider" id="bet-slider" min="20" max="1000" step="10" value="40" disabled>
+                    <input type="number" class="bet-number-input" id="bet-input" min="20" max="1000" step="10" value="40" disabled>
+                </div>
+                <div class="bet-presets-row">
+                    <button class="preset-chip-btn" data-preset="min">Mínimo</button>
+                    <button class="preset-chip-btn" data-preset="2.5bb">2.5x BB</button>
+                    <button class="preset-chip-btn" data-preset="3bb">3x BB</button>
+                    <button class="preset-chip-btn" data-preset="half_pot">1/2 Pote</button>
+                    <button class="preset-chip-btn" data-preset="pot">Pote</button>
+                    <button class="preset-chip-btn" data-preset="allin">All-in</button>
+                </div>
+            </div>
+
+            <!-- RAISE / BET -->
+            <button class="act-btn btn-raise" id="act-btn-raise" disabled>
+                <span id="raise-btn-label">APOSTAR</span>
+                <span class="sub-text" id="raise-btn-amount">$40</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- MODAL: HAND RANKINGS CHEAT SHEET -->
+    <div class="modal-backdrop" id="rules-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Hierarquia de Mãos de Poker</h2>
+                <button class="modal-close-btn" data-close-modal="rules-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="current-hand-banner" id="rules-current-hand-banner">
+                    <div class="current-hand-banner-icon">🎯</div>
+                    <div class="current-hand-banner-info">
+                        <span class="current-hand-banner-title">Sua Mão no Momento</span>
+                        <span class="current-hand-banner-desc" id="modal-current-hand-text">Aguardando início da mão...</span>
+                    </div>
+                </div>
+
+                <div class="hand-rank-row" data-category="10">
+                    <div class="name-wrap">
+                        <span class="name">1. Royal Flush</span>
+                    </div>
+                    <span class="desc">A, K, Q, J, 10 do mesmo naipe (Imbatível)</span>
+                </div>
+                <div class="hand-rank-row" data-category="9">
+                    <div class="name-wrap">
+                        <span class="name">2. Straight Flush</span>
+                    </div>
+                    <span class="desc">5 cartas em sequência do mesmo naipe</span>
+                </div>
+                <div class="hand-rank-row" data-category="8">
+                    <div class="name-wrap">
+                        <span class="name">3. Quadra (Four of a Kind)</span>
+                    </div>
+                    <span class="desc">4 cartas do mesmo valor</span>
+                </div>
+                <div class="hand-rank-row" data-category="7">
+                    <div class="name-wrap">
+                        <span class="name">4. Full House</span>
+                    </div>
+                    <span class="desc">Uma trinca e um par combinados</span>
+                </div>
+                <div class="hand-rank-row" data-category="6">
+                    <div class="name-wrap">
+                        <span class="name">5. Flush</span>
+                    </div>
+                    <span class="desc">5 cartas quaisquer do mesmo naipe</span>
+                </div>
+                <div class="hand-rank-row" data-category="5">
+                    <div class="name-wrap">
+                        <span class="name">6. Sequência (Straight)</span>
+                    </div>
+                    <span class="desc">5 cartas em ordem numérica sequencial</span>
+                </div>
+                <div class="hand-rank-row" data-category="4">
+                    <div class="name-wrap">
+                        <span class="name">7. Trinca (Three of a Kind)</span>
+                    </div>
+                    <span class="desc">3 cartas do mesmo valor</span>
+                </div>
+                <div class="hand-rank-row" data-category="3">
+                    <div class="name-wrap">
+                        <span class="name">8. Dois Pares (Two Pair)</span>
+                    </div>
+                    <span class="desc">Dois pares de valores diferentes</span>
+                </div>
+                <div class="hand-rank-row" data-category="2">
+                    <div class="name-wrap">
+                        <span class="name">9. Um Par (One Pair)</span>
+                    </div>
+                    <span class="desc">Duas cartas com o mesmo valor</span>
+                </div>
+                <div class="hand-rank-row" data-category="1">
+                    <div class="name-wrap">
+                        <span class="name">10. Carta Alta (High Card)</span>
+                    </div>
+                    <span class="desc">Nenhuma combinação; vale a carta mais alta</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: PLAYER STATS & REBUY -->
+    <div class="modal-backdrop" id="stats-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Estatísticas da Sessão</h2>
+                <button class="modal-close-btn" data-close-modal="stats-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="hand-rank-row">
+                    <span class="name">Mãos Jogadas</span>
+                    <span class="desc" id="stat-hands-played">0</span>
+                </div>
+                <div class="hand-rank-row">
+                    <span class="name">Mãos Vencidas</span>
+                    <span class="desc" id="stat-hands-won">0</span>
+                </div>
+                <div class="hand-rank-row">
+                    <span class="name">Taxa de Vitória</span>
+                    <span class="desc" id="stat-win-rate">0%</span>
+                </div>
+                <div class="hand-rank-row">
+                    <span class="name">Maior Pote Ganho</span>
+                    <span class="desc" id="stat-biggest-pot">$0</span>
+                </div>
+                <div class="hand-rank-row">
+                    <span class="name">Saldo / Lucro</span>
+                    <span class="desc" id="stat-profit" style="color: #34d399;">$0</span>
+                </div>
+                <div style="margin-top: 10px; display: flex; justify-content: center;">
+                    <button class="btn-new-hand" id="btn-rebuy-action" style="display: block;">
+                        Recarregar +$1,000 Fichas (Rebuy)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="/static/js/audio.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

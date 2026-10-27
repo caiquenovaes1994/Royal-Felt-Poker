@@ -1,0 +1,39 @@
+# ==============================================================================
+# Git Attributes - Normalização de Linhas e Configuração do GitHub Linguist
+# ==============================================================================
+
+# Normalização padrão de quebras de linha (LF para repositório)
+* text=auto eol=lf
+
+# Scripts de execução do Windows mantêm CRLF obrigatório
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Código Fonte Principal (Python)
+*.py text diff=python eol=lf
+
+# Frontend Web
+*.html text diff=html eol=lf
+*.css text diff=css eol=lf
+*.js text diff=javascript eol=lf
+*.json text eol=lf
+*.svg text eol=lf
+
+# Documentação
+*.md text eol=lf
+LICENSE text eol=lf
+
+# Binários e Mídia
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+
+# GitHub Linguist (Garante foco exclusivo nos arquivos do projeto)
+*.bat linguist-vendored=true
+requirements.txt linguist-documentation=true
